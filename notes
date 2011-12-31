@@ -1,0 +1,28 @@
+the system will communicate using get request between the servers
+the basic request will be the search command
+
+commands:
+	search:
+		will look up data in its own database
+		will also ask a few random peers that it has
+		all data returned by the peers will be inserted into the node's own database assuming it did not already have the data itself
+		will include a depth count, node may configure the max depth that it will respect, hard code in 50
+	request:
+		if the fragment is present on the server then it send the file, otherwise 404
+	locate:
+		help file a hash in the network
+		if a node contains the hash that is being searched for it will include its public access point in the results
+		will be used when starting to download a file
+	init:
+		when making the first connection to another node, the peer will check the public address of the requesting node
+	bootstrap:
+		when a node starts out in the network, it needs to know the address of at least one other peer, the peer will check that the node has properly set up its public address and then give it upto 5 public addresses of other nodes
+		
+		
+data formats:
+	search results:
+		will return a csv file with all the results that the node has found
+		hash of file,title (max length 140)
+	hash of file:
+		will include a JSON encoding with description that was written when it was uploaded.  Will included a list of all the hashes of all parts of the file
+		similar to a .torrent file with the meta data
